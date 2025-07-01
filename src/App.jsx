@@ -1,28 +1,22 @@
-import EpisodeDetails from "./episodes/EpisodeDetails";
-import EpisodeList from "./episodes/EpisodeList";
-import { tvShows } from "./shows/data";
+import ShowSelection from "./shows/ShowSelection";
+import ShowDetails from "./shows/ShowDetails";
 import { useState } from "react";
+import { tvShows } from "./shows/data";
 
 /**
  * React TV is an web streaming platform that allows users to browse
  * through the episodes of a variety of different shows.
  */
 export default function App() {
-  const [selectedEpisode, setSelectedEpisode] = useState(null);
   const [selectedShow, setSelectedShow] = useState(tvShows[0]);
   return (
     <>
       <header>
         <p>React TV</p>
+        <ShowSelection shows={tvShows} setSelectedShow={setSelectedShow} />
       </header>
       <main>
-        <EpisodeList
-          name={selectedShow.name}
-          episodes={selectedShow.episodes}
-          selectedEpisode={selectedEpisode}
-          setSelectedEpisode={setSelectedEpisode}
-        />
-        <EpisodeDetails episode={selectedEpisode} />
+        <ShowDetails show={selectedShow} />
       </main>
     </>
   );
